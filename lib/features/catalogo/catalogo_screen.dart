@@ -6,10 +6,6 @@ import 'data/destinos_data.dart';
 import 'detalle_screen.dart';
 import 'models/destino.dart';
 
-/// PANTALLA 2 · Catálogo (Integrante 2)
-///
-/// Lista filtrable por categoría. En pantallas anchas (tablet u
-/// horizontal) muestra 2 columnas gracias a LayoutBuilder.
 class CatalogoScreen extends StatefulWidget {
   final Categoria? categoriaInicial;
 
