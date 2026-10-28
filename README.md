@@ -1,7 +1,7 @@
 # Rutas Mixtecas · Práctica 1
 
 **Personalización visual y componentes reutilizables**
-Equipo 1: Yaretzy Montesinos López y Mario · Desarrollo de Aplicaciones Móviles · 7 US
+Equipo 1: Yaretzy  y Mario · Desarrollo de Aplicaciones Móviles · 7 US
 
 Catálogo de destinos turísticos de la Mixteca con datos estáticos, 3 pantallas,
 4 widgets reutilizables y un tema global en `lib/core/theme/app_theme.dart`.
