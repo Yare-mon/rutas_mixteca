@@ -6,10 +6,6 @@ import 'data/destinos_data.dart';
 import 'detalle_screen.dart';
 import 'models/destino.dart';
 
-/// PANTALLA 2 · Catálogo (Integrante 2)
-///
-/// Lista filtrable por categoría. En pantallas anchas (tablet u
-/// horizontal) muestra 2 columnas gracias a LayoutBuilder.
 class CatalogoScreen extends StatefulWidget {
   final Categoria? categoriaInicial;
 
@@ -80,13 +76,25 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
           Expanded(
             child: LayoutBuilder(
               builder: (context, restricciones) {
-                final int columnas = restricciones.maxWidth >= 700 ? 2 : 1;
+                // Pantalla angosta (celular vertical): lista normal, cada
+                // tarjeta mide lo que necesite su contenido.
+                if (restricciones.maxWidth < 700) {
+                  return ListView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: lista.length,
+                    itemBuilder: (_, i) => TarjetaDestino(
+                      destino: lista[i],
+                      onTap: () => _abrirDetalle(lista[i]),
+                    ),
+                  );
+                }
+                // Pantalla ancha (tablet u horizontal): 2 columnas.
                 return GridView.builder(
                   padding: const EdgeInsets.all(16),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: columnas,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
                     crossAxisSpacing: 12,
-                    mainAxisExtent: 146,
+                    mainAxisExtent: 190,
                   ),
                   itemCount: lista.length,
                   itemBuilder: (_, i) => TarjetaDestino(
