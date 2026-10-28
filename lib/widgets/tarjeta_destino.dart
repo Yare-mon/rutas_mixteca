@@ -3,12 +3,6 @@ import 'package:flutter/material.dart';
 import '../features/catalogo/models/destino.dart';
 import 'etiqueta_categoria.dart';
 
-/// WIDGET 4 · TarjetaDestino (Integrante 2)
-///
-/// Muestra un destino. Se reutiliza con datos diferentes y en dos formas:
-/// - `compacta: true`  → tarjeta vertical en el carrusel de Inicio.
-/// - `compacta: false` → fila horizontal en el Catálogo.
-/// La forma, sombra y color de la tarjeta vienen del CardTheme global.
 class TarjetaDestino extends StatelessWidget {
   final Destino destino;
   final VoidCallback onTap;
@@ -66,30 +60,44 @@ class TarjetaDestino extends StatelessWidget {
     return Card(
       child: InkWell(
         onTap: onTap,
-        child: Row(
-          children: [
-            SizedBox(width: 110, height: 130, child: portada),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(destino.nombre, style: textos.titleMedium),
-                    const SizedBox(height: 4),
-                    Text(
-                      destino.resumen,
-                      style: textos.bodyMedium,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 6),
-                    EtiquetaCategoria(categoria: destino.categoria),
-                  ],
+        // IntrinsicHeight + stretch: la portada crece a la altura del texto,
+        // así la tarjeta nunca se desborda aunque el nombre ocupe 2 líneas.
+        child: IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ConstrainedBox(
+                constraints: const BoxConstraints(minHeight: 130),
+                child: SizedBox(width: 110, child: portada),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        destino.nombre,
+                        style: textos.titleMedium,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        destino.resumen,
+                        style: textos.bodyMedium,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 6),
+                      EtiquetaCategoria(categoria: destino.categoria),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
