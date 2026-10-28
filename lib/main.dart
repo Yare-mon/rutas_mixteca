@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'core/theme/app_theme.dart';
 
-void main() => runApp(const RutasMixtecaApp());
+import 'core/theme/app_theme.dart';
+import 'features/inicio/inicio_screen.dart';
+
+void main() {
+  runApp(const RutasMixtecaApp());
+}
 
 class RutasMixtecaApp extends StatelessWidget {
   const RutasMixtecaApp({super.key});
@@ -11,8 +15,9 @@ class RutasMixtecaApp extends StatelessWidget {
     return MaterialApp(
       title: 'Rutas Mixtecas',
       debugShowCheckedModeBanner: false,
+      // Un solo punto de configuración visual para TODA la aplicación.
       theme: AppTheme.tema,
-      home: const Scaffold(body: Center(child: Text('Rutas Mixtecas'))),
+      home: const InicioScreen(),
     );
   }
 }
